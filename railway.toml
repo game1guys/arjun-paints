@@ -1,0 +1,5 @@
+# https://docs.railway.com/reference/config-as-code
+# Root Dockerfile is auto-detected; healthcheck hits Laravel's /up (fast 200).
+[deploy]
+healthcheckPath = "/up"
+healthcheckTimeout = 300

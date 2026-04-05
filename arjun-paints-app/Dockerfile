@@ -43,7 +43,8 @@ RUN npm ci && npm run build
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-ENV PORT=10000
-EXPOSE 10000
+RUN chmod +x docker-entrypoint.sh
 
-CMD sh -c "php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && exec php artisan serve --host=0.0.0.0 --port=${PORT}"
+EXPOSE 8080
+
+CMD ["./docker-entrypoint.sh"]

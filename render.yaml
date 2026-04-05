@@ -1,5 +1,10 @@
 # Blueprint: https://render.com/docs/blueprint-spec
-# Set secrets in the Render dashboard: APP_KEY, APP_URL, DB_*, etc.
+#
+# Supabase + Docker on Render: if logs show "Network is unreachable" to db.*.supabase.co,
+# use Supabase Connection pooling (Session mode) host + DB_USERNAME=postgres.PROJECT_REF
+# (see arjun-paints-app/.env.example). Or attach Render Postgres and set DATABASE_URL.
+#
+# Set secrets in the dashboard: APP_KEY, APP_URL, DB_* or DATABASE_URL, etc.
 services:
   - type: web
     name: arjun-paints
