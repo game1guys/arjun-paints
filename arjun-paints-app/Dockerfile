@@ -11,8 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6-dev \
     libonig-dev \
     libicu-dev \
+    libxml2-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql zip mbstring exif pcntl bcmath gd \
+    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql zip mbstring exif pcntl bcmath gd xml xmlwriter dom \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
