@@ -1,0 +1,15 @@
+# Blueprint: https://render.com/docs/blueprint-spec
+# Set secrets in the Render dashboard: APP_KEY, APP_URL, DB_*, etc.
+services:
+  - type: web
+    name: arjun-paints
+    runtime: docker
+    rootDir: arjun-paints-app
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /up
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
