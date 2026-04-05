@@ -4,7 +4,6 @@ services:
   - type: web
     name: arjun-paints
     runtime: docker
-    rootDir: arjun-paints-app
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /up

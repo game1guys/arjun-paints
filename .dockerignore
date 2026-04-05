@@ -1,0 +1,12 @@
+.git
+arjun-paints-app/node_modules
+arjun-paints-app/vendor
+arjun-paints-app/.env
+arjun-paints-app/storage/logs
+arjun-paints-app/storage/framework/cache
+arjun-paints-app/storage/framework/sessions
+arjun-paints-app/storage/framework/views
+arjun-paints-app/bootstrap/cache
+arjun-paints-app/.phpunit.result.cache
+arjun-paints-app/tests
+.DS_Store
