@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     libonig-dev \
+    libicu-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" pdo pdo_pgsql zip mbstring exif pcntl bcmath gd \
+    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql zip mbstring exif pcntl bcmath gd \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,12 +29,14 @@ WORKDIR /var/www/html
 
 COPY arjun-paints-app/ .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-scripts \
-    && cp .env.example .env \
-    && php artisan key:generate --force \
-    && composer dump-autoload --optimize \
-    && npm ci \
-    && npm run build
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-scripts
+
+RUN cp .env.example .env && php artisan key:generate --force
+
+RUN composer dump-autoload --optimize
+
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN npm ci && npm run build
 
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
