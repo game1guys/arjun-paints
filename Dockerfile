@@ -1,6 +1,7 @@
 # Build from repository root (Render default: Root Directory empty).
 # App lives in arjun-paints-app/
-FROM php:8.3-cli-bookworm
+# composer.lock requires PHP 8.4+ (e.g. symfony/* v8). PHP 8.3 fails composer install.
+FROM php:8.4-cli-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -30,7 +31,7 @@ WORKDIR /var/www/html
 
 COPY arjun-paints-app/ .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 RUN cp .env.example .env && php artisan key:generate --force
 

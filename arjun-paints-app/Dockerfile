@@ -1,4 +1,4 @@
-FROM php:8.3-cli-bookworm
+FROM php:8.4-cli-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -28,7 +28,7 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 RUN cp .env.example .env && php artisan key:generate --force
 
