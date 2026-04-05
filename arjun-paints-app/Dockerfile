@@ -28,6 +28,9 @@ WORKDIR /var/www/html
 
 COPY . .
 
+RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs \
+    && chmod -R 775 bootstrap/cache storage
+
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 RUN cp .env.example .env && php artisan key:generate --force
